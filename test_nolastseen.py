@@ -3,8 +3,9 @@ from datetime import datetime
 import datetime as dt
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+import chromedriver_binary
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome("C:\\Users\\divya\\Desktop\\dc_old\\whatsapp using phone\\chromedriver")
 driver.get('http://web.whatsapp.com')
 
 #list_names = input('Enter the contact names: ')
@@ -34,12 +35,12 @@ while True:
             print(names)
             #user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(names))
             #user.click()
-            search_field = driver.find_element_by_class_name('jN-F5') 
+            search_field = driver.find_element_by_class_name('_3FRCZ') 
             search_field.send_keys(names + Keys.ENTER)
             try:
                 time.sleep(5)
-                last_seen = driver.find_element_by_class_name('O90ur').text
-                
+                last_seen = driver.find_element_by_class_name('_3-cMa').text
+                print("last seen ", last_seen)
                 if len(last_seen) > 0:
                     print (names + " is online at " +  str(datetime.now()) + "\n")
                     file = open("lastseendata.txt", "a")
@@ -54,6 +55,7 @@ while True:
                
                     file.close()
             except Exception as e:
+                print("in exception")
                 if(started == True):
                     print(names + " went offline at " +  str(datetime.now()) + "\n")
                     file = open("lastseendata.txt", "a")
